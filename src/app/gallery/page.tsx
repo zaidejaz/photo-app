@@ -1,10 +1,10 @@
 import React from 'react'
 import CloudinaryImage from '@/components/cloudinary-image';
 import cloudinary from 'cloudinary'
-import { CldImage } from 'next-cloudinary';
 
-type searchResult = {
+export type searchResult = {
     public_id: string;
+    tags: string[];
 }
 
 const Gallery = async () => {
@@ -12,7 +12,8 @@ const Gallery = async () => {
     const results = await cloudinary.v2.search
         .expression('resource_type:image')
         .sort_by('created_at', 'desc')
-        .max_results(30)
+        .with_field('tags')
+        .max_results(1)
         .execute() as {resources: searchResult[]};
 
     return (
@@ -20,11 +21,11 @@ const Gallery = async () => {
             <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
                 Gallery
             </h1>
-            <div className='grid grid-cols-4 my-4'>
+            <div className='grid grid-cols-4 my-4 gap-4'>
                 {
                     results.resources.map((result) => (
                        <CloudinaryImage 
-                       publicId={result.public_id}
+                       imageData={result}
                        />
                     ))
                 }

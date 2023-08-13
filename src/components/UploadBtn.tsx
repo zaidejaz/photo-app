@@ -9,7 +9,7 @@ const UploadBtn = () => {
     const handleupload = () => {
         setTimeout(() => {
             router.refresh()
-        },(1000))
+        },(700))
     }
     return (
         <Button asChild className='cursor-pointer'>
