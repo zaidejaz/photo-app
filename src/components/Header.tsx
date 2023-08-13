@@ -2,7 +2,7 @@
 import { CldUploadButton } from 'next-cloudinary'
 import React from 'react'
 import { ModeToggle } from './toggle-theme'
-import { Button } from './ui/button'
+import UploadBtn from './UploadBtn'
 
 const Header = () => {
     return (
@@ -12,9 +12,7 @@ const Header = () => {
                     Photo App
                 </h2>
                 <div className='flex space-x-4'>
-                    <Button asChild>
-                        <CldUploadButton uploadPreset="jhkwtl62" />
-                    </Button>
+                    <UploadBtn />
                     <ModeToggle />
                 </div>
             </nav>

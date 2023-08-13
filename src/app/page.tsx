@@ -1,5 +1,4 @@
-"use client"
-import { CldUploadButton } from 'next-cloudinary';
+import React from 'react'
 
 export default function Home() {
   return (
