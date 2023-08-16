@@ -1,11 +1,13 @@
-"use server"
+"use server";
 import cloudinary from "cloudinary";
-import { revalidatePath } from "next/cache";
 
-export async function setAsFavouriteAction(publicId:string){
-    await cloudinary.v2.uploader.add_tag("favourite", [publicId]);
-}
-
-export async function removeAsFavouriteAction(publicId:string){
+export async function setAsFavouriteAction(
+  publicId: string,
+  isFavourited: boolean
+) {
+  if (isFavourited) {
     await cloudinary.v2.uploader.remove_tag("favourite", [publicId]);
+  } else {
+    await cloudinary.v2.uploader.add_tag("favourite", [publicId]);
+  }
 }

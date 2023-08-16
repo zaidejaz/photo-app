@@ -16,38 +16,23 @@ const FavouritesList = ({
   return (
     <MasonaryGrid
       images={resources}
-      getImage = {
-        (imageData: searchResult) => {
-          return <CloudinaryImage
-                imageData={imageData}
-                alt="Favourite Image"
-                onUnheart={(unheartedResource) =>
-                  setResources((currentResource) =>
-                    currentResource.filter(
-                      (resource) => resource.public_id !== unheartedResource.public_id
-                    )
-                  )
-                }
-              />;
-        }
-      }
-      />
-
-    // <div className="grid grid-cols-4 my-4 gap-4">
-    //   {resources.map((result) => (
-    //     <CloudinaryImage
-    //       imageData={result}
-    //       alt="Favourite Image"
-    //       onUnheart={(unheartedResource) =>
-    //         setResources((currentResource) =>
-    //           currentResource.filter(
-    //             (resource) => resource.public_id !== unheartedResource.public_id
-    //           )
-    //         )
-    //       }
-    //     />
-    //   ))}
-    // </div>
+      getImage={(imageData: searchResult) => {
+        return (
+          <CloudinaryImage
+            imageData={imageData}
+            alt="Favourite Image"
+            onUnheart={(unheartedResource) =>
+              setResources((currentResource) =>
+                currentResource.filter(
+                  (resource) =>
+                    resource.public_id !== unheartedResource.public_id
+                )
+              )
+            }
+          />
+        );
+      }}
+    />
   );
 };
 
