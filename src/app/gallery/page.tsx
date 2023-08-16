@@ -13,7 +13,7 @@ const Gallery = async () => {
         .expression('resource_type:image')
         .sort_by('created_at', 'desc')
         .with_field('tags')
-        .max_results(1)
+        .max_results(10)
         .execute() as {resources: searchResult[]};
 
     return (
@@ -25,6 +25,7 @@ const Gallery = async () => {
                 {
                     results.resources.map((result) => (
                        <CloudinaryImage 
+                       alt='My Image'
                        imageData={result}
                        />
                     ))
