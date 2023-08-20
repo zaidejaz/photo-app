@@ -1,11 +1,10 @@
-import { cn } from '@/lib/utils'
 import React from 'react'
 import { Button } from './ui/button'
 import Link from 'next/link'
 
 const SiderBar = () => {
     return (
-        <div className='w-[20vw]'>
+        <div className='w-[18vw]'>
             <div className="space-y-4 py-4">
                 <div className="px-3 py-2">
                     <h2 className="mb-2 px-4 text-lg font-semibold tracking-tight">

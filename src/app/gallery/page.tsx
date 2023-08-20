@@ -24,7 +24,7 @@ const Gallery = async () => {
       <MasonaryGrid
         images={results.resources}
         getImage={(imageData: searchResult) => {
-          return <CloudinaryImage alt="My Image" imageData={imageData} />;
+          return <CloudinaryImage alt="My Image" imageData={imageData}/>;
         }}
       />
     </div>

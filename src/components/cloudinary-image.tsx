@@ -1,10 +1,11 @@
 "use client";
-import React, { useEffect, useState, useTransition } from "react";
+import React, { useState, useTransition } from "react";
 import { CldImage, CldImageProps } from "next-cloudinary";
 import { setAsFavouriteAction } from "@/utils/actions";
 import { searchResult } from "@/app/gallery/page";
 import { HeartIcon } from "@radix-ui/react-icons";
 import { HeartFilledIcon } from "@radix-ui/react-icons";
+import { ImageMenu } from "./image-menu";
 
 const CloudinaryImage = (
   props: {
@@ -18,6 +19,7 @@ const CloudinaryImage = (
   );
 
   const [transition, startTransition] = useTransition();
+
   return (
     <div className="relative">
       <CldImage
@@ -28,7 +30,7 @@ const CloudinaryImage = (
       />
       {isFavourited ? (
         <HeartFilledIcon
-          className="w-6 h-6 text-red-500 absolute top-2 right-2 cursor-pointer"
+          className="w-6 h-6 text-red-500 absolute top-2 left-2 cursor-pointer"
           onClick={() => {
             setIsFavourited(false);
             startTransition(() => {
@@ -39,15 +41,18 @@ const CloudinaryImage = (
         />
       ) : (
         <HeartIcon
-          className="w-6 h-6 text-white hover:text-red-500 absolute top-2 right-2 cursor-pointer"
+          className="w-6 h-6 text-white hover:text-red-500 absolute top-2 left-2 cursor-pointer"
           onClick={() => {
-            setIsFavourited(true);
             startTransition(() => {
               setAsFavouriteAction(imageData.public_id, false);
             });
+            setIsFavourited(true);
           }}
         />
       )}
+      <div className="absolute top-2 right-2">
+      <ImageMenu/>
+      </div>
     </div>
   );
 };

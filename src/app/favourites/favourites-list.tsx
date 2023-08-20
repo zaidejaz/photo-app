@@ -10,9 +10,11 @@ const FavouritesList = ({
   initialResources: searchResult[];
 }) => {
   const [resources, setResources] = useState(initialResources);
+
   useEffect(() => {
     setResources(initialResources);
   }, [initialResources]);
+  
   return (
     <MasonaryGrid
       images={resources}
