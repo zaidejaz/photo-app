@@ -23,7 +23,7 @@ const AlbumCard = ({
         <CardTitle>{folderName.toUpperCase()}</CardTitle>
         <CardDescription>{`All of your ${folderName} Album Images`}</CardDescription>
       </CardHeader>
-      <CardFooter>
+      <CardFooter className="mt-auto">
         <Button asChild>
           <Link href={`albums/${folderPath}`}>See More</Link>
         </Button>

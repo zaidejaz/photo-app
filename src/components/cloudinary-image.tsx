@@ -19,7 +19,6 @@ const CloudinaryImage = (
   );
 
   const [transition, startTransition] = useTransition();
-
   return (
     <div className="relative">
       <CldImage
@@ -51,7 +50,7 @@ const CloudinaryImage = (
         />
       )}
       <div className="absolute top-2 right-2">
-      <ImageMenu/>
+        <ImageMenu image={imageData.public_id} />
       </div>
     </div>
   );

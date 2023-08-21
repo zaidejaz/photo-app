@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -17,13 +18,32 @@ import {
 } from "@/components/ui/select";
 
 import { Label } from "@/components/ui/label";
-import { PlusIcon } from "@radix-ui/react-icons";
+import { Cross2Icon, PlusIcon } from "@radix-ui/react-icons";
+import { addImageToAlbum, getFolders } from "@/utils/actions";
+import { Folder } from "@/app/albums/page";
+import { DialogClose } from "@radix-ui/react-dialog";
+import { toast } from "./ui/use-toast";
 
-export function AddToAlbumDialog() {
+export function AddToAlbumDialog({ image }: { image: string }) {
+  const [albums, setAlbums] = useState<Folder[]>([]);
+  const [selectedAlbum, setSelectedAlbum] = useState<string>("");
+
+  useEffect(() => {
+    async function fetchAlbums() {
+      const albumsData = await getFolders();
+      setAlbums(albumsData);
+    }
+
+    fetchAlbums();
+  }, []);
+
   return (
     <Dialog>
       <DialogTrigger>
-        <Button variant="ghost" className="hover:bg-gray-100 hover:text-black gap-3 items-center">
+        <Button
+          variant="ghost"
+          className="hover:bg-gray-100 hover:text-black gap-3 items-center"
+        >
           <PlusIcon />
           Add To Album
         </Button>
@@ -38,21 +58,52 @@ export function AddToAlbumDialog() {
             <Label htmlFor="name" className="text-right">
               Album
             </Label>
-            <Select>
+            <Select
+              onValueChange={(newValue) => {
+                setSelectedAlbum(newValue);
+              }}
+            >
               <SelectTrigger className="w-[180px]">
                 <SelectValue placeholder="Select Album" />
               </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="outdoor">Outdoors</SelectItem>
-                <SelectItem value="night">Night</SelectItem>
-                <SelectItem value="snowfall">Snowfall</SelectItem>
+              <SelectContent className="space-y-3">
+                {albums.map((album: Folder) => (
+                  <SelectItem key={album.path} value={album.name}>
+                    {album.name}
+                  </SelectItem>
+                ))}
               </SelectContent>
             </Select>
           </div>
         </div>
         <DialogFooter>
-          <Button type="submit">Add To Album</Button>
+          <DialogClose>
+            <Button
+              onClick={async () => {
+                const result: any = await addImageToAlbum(image, selectedAlbum);
+                if (result.statusCode === 200) {
+                  toast({
+                    variant: "success",
+                    title: "Added To Album",
+                    description: "Image Added To Album",
+                  });
+                } else {
+                  toast({
+                    variant: "destructive",
+                    title: "Error",
+                    description: "Error Adding Image To Album",
+                  });
+                }
+              }}
+            >
+              Add To Album
+            </Button>
+          </DialogClose>
         </DialogFooter>
+        <DialogClose className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground">
+          <Cross2Icon className="h-4 w-4" />
+          <span className="sr-only">Close</span>
+        </DialogClose>
       </DialogContent>
     </Dialog>
   );
