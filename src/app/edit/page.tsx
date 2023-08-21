@@ -14,7 +14,7 @@ const Edit = ({
   const [prompt, setPrompt] = useState<string>("");
   const [pendingPrompt, setPendingPrompt] = useState<string>("");
   return (
-    <div className="px-4">
+    <div className="px-4 mt-5">
       <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
         Edit Image
       </h1>
@@ -63,17 +63,17 @@ const Edit = ({
           Blur
         </Button>
       </div>
-      <div className="flex items-center space-x-4">
-        <Label htmlFor={"prompt"} className="text-xl">
-          Prompt
-        </Label>
-        <Input
-          id="prompt"
-          className="w-[30vw]"
-          onChange={(e) => {
-            setPendingPrompt(e.currentTarget.value);
-          }}
-        />
+      <div className="md:flex items-center space-x-0 space-y-2 md:space-y-0 md:space-x-3">
+          <Label htmlFor={"prompt"} className="text-xl">
+            Prompt
+          </Label>
+          <Input
+            id="prompt"
+            className="md:w-[40vw]"
+            onChange={(e) => {
+              setPendingPrompt(e.currentTarget.value);
+            }}
+          />
         <Button
           onClick={() => {
             setEdit("generativefill");
@@ -146,7 +146,7 @@ const Edit = ({
                 src={image}
                 width={800}
                 height={400}
-                fillBackground={{prompt}}
+                fillBackground={{ prompt }}
               />
             )}
           </div>

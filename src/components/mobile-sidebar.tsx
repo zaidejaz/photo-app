@@ -36,6 +36,7 @@ const MobileSiderBar = (props: any) => {
           />
         </SheetTrigger>
         <SheetContent
+        side={"left"}
           onInteractOutside={() => {
             setSheetState(false);
           }}
@@ -50,7 +51,7 @@ const MobileSiderBar = (props: any) => {
                 className="w-full justify-start gap-2 items-center"
                 onClick={handleLinkClick}
               >
-                <ImageIcon />
+                <ImageIcon height={20} width={20}/>
                 <span className="text-xl">Gallery</span>
               </Button>
             </Link>
@@ -60,7 +61,7 @@ const MobileSiderBar = (props: any) => {
                 className="w-full justify-start gap-2 items-center"
                 onClick={handleLinkClick}
               >
-                <CardStackIcon />
+                <CardStackIcon height={20} width={20}/>
                 <span className="text-xl">Albums</span>
               </Button>
             </Link>
@@ -70,7 +71,7 @@ const MobileSiderBar = (props: any) => {
                 className="flex w-full justify-start gap-2 items-center"
                 onClick={handleLinkClick}
               >
-                <HeartIcon />
+                <HeartIcon height={20} width={20}/>
                 <span className="text-xl">Favourites</span>
               </Button>
             </Link>
