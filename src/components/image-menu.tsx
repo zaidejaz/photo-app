@@ -10,6 +10,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { AddToAlbumDialog } from "./add-to-album-dialog";
+import Link from "next/link";
 
 export function ImageMenu({ image }: { image: string }) {
   const [menu, setMenu] = useState(false);
@@ -33,12 +34,25 @@ export function ImageMenu({ image }: { image: string }) {
         }}
       >
         <DropdownMenuGroup>
-          <DropdownMenuItem asChild className="gap-2">
-            <AddToAlbumDialog image={image}/>
+          <DropdownMenuItem
+            asChild
+            className="gap-2"
+            onClick={() => {
+              setMenu(false);
+            }}
+          >
+            <AddToAlbumDialog image={image} />
           </DropdownMenuItem>
-          <DropdownMenuItem className="gap-3 py-2 hover:bg-gray-100 px-4 font-medium">
-            <Pencil1Icon />
-            Edit
+          <DropdownMenuItem
+            className="gap-3 py-2 hover:bg-gray-100 px-4 font-medium"
+            onClick={() => {
+              setMenu(false);
+            }}
+          >
+            <Link href={`/edit?image=${decodeURIComponent(image)}`}>
+              <Pencil1Icon />
+              Edit
+            </Link>
           </DropdownMenuItem>
         </DropdownMenuGroup>
       </DropdownMenuContent>
