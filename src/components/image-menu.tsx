@@ -49,9 +49,12 @@ export function ImageMenu({ image }: { image: string }) {
               setMenu(false);
             }}
           >
-            <Link href={`/edit?image=${decodeURIComponent(image)}`}>
-              <Pencil1Icon />
-              Edit
+            <Link
+              href={`/edit?image=${decodeURIComponent(image)}`}
+              className="flex space-x-2"
+            >
+              <Pencil1Icon width={20} height={20} />
+              <span>Edit</span>
             </Link>
           </DropdownMenuItem>
         </DropdownMenuGroup>

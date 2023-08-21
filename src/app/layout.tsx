@@ -29,12 +29,12 @@ export default function RootLayout({
         >
           <Header />
           <div className="flex">
-            <div className="w-[20vw]">
-            <SiderBar/>
+            <div className="w-[20vw] hidden lg:flex">
+              <SiderBar />
             </div>
             {children}
           </div>
-          <Toaster/>
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>

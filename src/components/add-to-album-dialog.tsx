@@ -39,13 +39,13 @@ export function AddToAlbumDialog({ image }: { image: string }) {
 
   return (
     <Dialog>
-      <DialogTrigger>
+      <DialogTrigger className="w-full">
         <Button
           variant="ghost"
-          className="hover:bg-gray-100 hover:text-black gap-3 items-center"
+          className="hover:bg-gray-100 hover:text-black space-x-1 items-center"
         >
-          <PlusIcon />
-          Add To Album
+          <PlusIcon  height={20} width={20}/>
+          <span>Add To Album</span>
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px] dark:bg-black">
