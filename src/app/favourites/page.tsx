@@ -3,6 +3,7 @@ import CloudinaryImage from "@/components/cloudinary-image";
 import cloudinary from "cloudinary";
 import { searchResult } from "@/app/gallery/page";
 import FavouritesList from "./favourites-list";
+import ForceRefresh from "@/components/Force-Refresh";
 
 const Favourites = async () => {
   const results = (await cloudinary.v2.search
@@ -13,14 +14,17 @@ const Favourites = async () => {
     .execute()) as { resources: searchResult[] };
 
   return (
-    <div className="mt-5">
-      <div className="px-4">
-        <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
-          Favourites
-        </h1>
-        <FavouritesList initialResources={results.resources} />
+    <>
+      <ForceRefresh />
+      <div className="mt-5">
+        <div className="px-4">
+          <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
+            Favourites
+          </h1>
+          <FavouritesList initialResources={results.resources} />
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

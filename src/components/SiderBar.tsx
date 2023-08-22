@@ -5,7 +5,6 @@ import Link from "next/link";
 import { CardStackIcon, HeartIcon, ImageIcon } from "@radix-ui/react-icons";
 
 const SiderBar = () => {
-  const [selected, setSelected] = useState("gallery");
   return (
     <div className="w-[18vw]">
       <div className="space-y-4 py-4">
@@ -16,9 +15,8 @@ const SiderBar = () => {
           <div className="space-y-1">
             <Link href={"/gallery"}>
               <Button
-                variant={selected === "gallery" ? "default" : "ghost"}
+                variant={"ghost"}
                 className="w-full justify-start gap-2 items-center"
-                onClick={() => setSelected("gallery")}
               >
                 <ImageIcon width={20} height={20} />
                 <span className="text-xl">Gallery</span>
@@ -26,9 +24,8 @@ const SiderBar = () => {
             </Link>
             <Link href={"/albums"}>
               <Button
-                variant={selected === "albums" ? "default" : "ghost"}
+                variant={"ghost"}
                 className="w-full justify-start gap-2 items-center"
-                onClick={() => setSelected("albums")}
               >
                 <CardStackIcon width={20} height={20} />
                 <span className="text-xl">Albums</span>
@@ -36,9 +33,8 @@ const SiderBar = () => {
             </Link>
             <Link href={"/favourites"}>
               <Button
-                variant={selected === "favourites" ? "default" : "ghost"}
+                variant={"ghost"}
                 className="flex w-full justify-start gap-2 items-center"
-                onClick={() => setSelected("favourites")}
               >
                 <HeartIcon width={20} height={20} />
                 <span className="text-xl">Favourites</span>
