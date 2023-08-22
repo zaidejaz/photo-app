@@ -101,7 +101,7 @@ const Edit = ({
                 src={image}
                 width={600}
                 height={400}
-                tint="equalize:80:blue:blueviolet"
+                tint
               />
             )}
             {edit === "removebg" && (
