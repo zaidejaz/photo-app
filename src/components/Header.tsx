@@ -15,8 +15,8 @@ const Header = () => {
           <Link href={"/"}>
           <div className="flex items-center space-x-2">
           <Image src={"/logo.png"} width={50} height={50} alt="PicPerfect" />
-          <h2 className="text-3xl font-semibold transition-colors text-primary hidden md:flex">
-            Photo App
+          <h2 className="text-3xl font-semibold transition-colors text-primary hidden md:flex italic">
+            PicPerfect
           </h2>
           </div>
           </Link>
