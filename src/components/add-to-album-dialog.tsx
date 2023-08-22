@@ -84,14 +84,14 @@ export function AddToAlbumDialog({ image }: { image: string }) {
                 if (result.statusCode === 200) {
                   toast({
                     variant: "success",
-                    title: "Added To Album",
-                    description: "Image Added To Album",
+                    title: "Success!!",
+                    description: "Image Added To Album Successfully.",
                   });
                 } else {
                   toast({
                     variant: "destructive",
-                    title: "Error",
-                    description: "Error Adding Image To Album",
+                    title: "Something Bad Happened!!",
+                    description: "There was an error adding image to album.",
                   });
                 }
               }}

@@ -9,8 +9,8 @@ import { Toaster } from "@/components/ui/toaster";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Photo App",
-  description: "A Photo App built with Next.js and Cloudinary",
+  title: "PicPerfect",
+  description: "A Photo App for all your photos needs.",
 };
 
 export default function RootLayout({
