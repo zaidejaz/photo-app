@@ -11,6 +11,7 @@ const Edit = ({
 }: {
   searchParams: { image: string };
 }) => {
+  const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
   const [edit, setEdit] = useState<string>("");
   const [prompt, setPrompt] = useState<string>("");
   const [pendingPrompt, setPendingPrompt] = useState<string>("");
@@ -98,15 +99,15 @@ const Edit = ({
             </h3>
             {edit === "tint" && (
               <Image
-                src={`https://res.cloudinary.com/demo/image/upload/e_tint:80:blue:blueviolet/${image}`}
-                alt={"My Image"}
+                src={`https://res.cloudinary.com/${cloudName}/image/upload/e_tint:80:blue:blueviolet/${image}`}
+                alt={"Tinted Image"}
                 width={600}
                 height={400}
               />
             )}
             {edit === "removebg" && (
               <CldImage
-                alt={image}
+                alt={"Removed Background Image"}
                 src={image}
                 width={600}
                 height={400}
@@ -115,31 +116,31 @@ const Edit = ({
             )}
             {edit === "pixelate" && (
               <Image
-                src={`https://res.cloudinary.com/demo/image/upload/e_pixelate:20/${image}`}
-                alt={"Edited Image"}
+                src={`https://res.cloudinary.com/${cloudName}/image/upload/e_pixelate:20/${image}`}
+                alt={"Pixelated Image"}
                 width={600}
                 height={400}
               />
             )}
             {edit === "grayscale" && (
               <Image
-              src={`https://res.cloudinary.com/demo/image/upload/e_grayscale/${image}`}
-              alt={"Edited Image"}
-              width={600}
-              height={400}
-            />
+                src={`https://res.cloudinary.com/${cloudName}/image/upload/e_grayscale/${image}`}
+                alt={"Grayscaled Image"}
+                width={600}
+                height={400}
+              />
             )}
             {edit === "blur" && (
               <Image
-              src={`https://res.cloudinary.com/demo/image/upload/e_blur:800/${image}`}
-              alt={"Edited Image"}
-              width={600}
-              height={400}
-            />
+                src={`https://res.cloudinary.com/${cloudName}/image/upload/e_blur:800/${image}`}
+                alt={"Blured Image"}
+                width={600}
+                height={400}
+              />
             )}
             {edit === "generativefill" && (
               <CldImage
-                alt={image}
+                alt={"Generative Fill Image"}
                 src={image}
                 width={800}
                 height={400}
