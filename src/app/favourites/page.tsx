@@ -3,7 +3,6 @@ import CloudinaryImage from "@/components/cloudinary-image";
 import cloudinary from "cloudinary";
 import { searchResult } from "@/app/gallery/page";
 import FavouritesList from "./favourites-list";
-import ForceRefresh from "@/components/force-refresh";
 
 const Favourites = async () => {
   const results = (await cloudinary.v2.search
@@ -15,7 +14,6 @@ const Favourites = async () => {
 
   return (
     <div className="mt-5">
-      <ForceRefresh />
       <div className="px-4">
         <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
           Favourites
