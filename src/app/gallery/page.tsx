@@ -16,14 +16,20 @@ const Gallery = async () => {
     .max_results(10)
     .execute()) as { resources: searchResult[] };
   return (
-    <div className="px-4">
+    <div className="px-4 mt-5">
       <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
         Gallery
       </h1>
       <MasonaryGrid
         images={results.resources}
         getImage={(imageData: searchResult) => {
-          return <CloudinaryImage alt="My Image" imageData={imageData}/>;
+          return (
+            <CloudinaryImage
+              alt={imageData.public_id}
+              imageData={imageData}
+              path="/gallery"
+            />
+          );
         }}
       />
     </div>

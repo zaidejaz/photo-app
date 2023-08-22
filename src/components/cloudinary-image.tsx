@@ -10,6 +10,7 @@ import { ImageMenu } from "./image-menu";
 const CloudinaryImage = (
   props: {
     imageData: searchResult;
+    path?: string;
     onUnheart?: (unheartedResource: searchResult) => void;
   } & Omit<CldImageProps, "src">
 ) => {
@@ -17,7 +18,6 @@ const CloudinaryImage = (
   const [isFavourited, setIsFavourited] = useState(
     imageData.tags.includes("favourite")
   );
-
   const [transition, startTransition] = useTransition();
   return (
     <div className="relative">
@@ -31,7 +31,9 @@ const CloudinaryImage = (
         <HeartFilledIcon
           className="w-6 h-6 text-red-500 absolute top-2 left-2 cursor-pointer"
           onClick={() => {
-            setIsFavourited(false);
+            if(props.path === "/gallery" || props.path === "/album"){
+              setIsFavourited(false);
+            }
             startTransition(() => {
               setAsFavouriteAction(imageData.public_id, true);
             });

@@ -16,7 +16,7 @@ const Album = async ({params}:{params:{album:string}}) => {
         <MasonaryGrid
         images={results.resources}
         getImage={(imageData: searchResult) => {
-          return <CloudinaryImage alt="My Image" imageData={imageData}/>;
+          return <CloudinaryImage alt="My Image" imageData={imageData} path="/album"/>;
         }}
       />
     </div>

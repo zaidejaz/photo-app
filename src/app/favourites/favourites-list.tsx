@@ -23,6 +23,7 @@ const FavouritesList = ({
           <CloudinaryImage
             imageData={imageData}
             alt="Favourite Image"
+            path="/favourites"
             onUnheart={(unheartedResource) =>
               setResources((currentResource) =>
                 currentResource.filter(
