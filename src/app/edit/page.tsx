@@ -4,6 +4,7 @@ import { CldImage } from "next-cloudinary";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import Image from "next/image";
 
 const Edit = ({
   searchParams: { image },
@@ -64,16 +65,16 @@ const Edit = ({
         </Button>
       </div>
       <div className="md:flex items-center space-x-0 space-y-2 md:space-y-0 md:space-x-3">
-          <Label htmlFor={"prompt"} className="text-xl">
-            Prompt
-          </Label>
-          <Input
-            id="prompt"
-            className="md:w-[40vw]"
-            onChange={(e) => {
-              setPendingPrompt(e.currentTarget.value);
-            }}
-          />
+        <Label htmlFor={"prompt"} className="text-xl">
+          Prompt
+        </Label>
+        <Input
+          id="prompt"
+          className="md:w-[40vw]"
+          onChange={(e) => {
+            setPendingPrompt(e.currentTarget.value);
+          }}
+        />
         <Button
           onClick={() => {
             setEdit("generativefill");
@@ -96,12 +97,11 @@ const Edit = ({
               Edited Image
             </h3>
             {edit === "tint" && (
-              <CldImage
-                alt={image}
-                src={image}
+              <Image
+                src={`https://res.cloudinary.com/demo/image/upload/e_tint:80:blue:blueviolet/${image}`}
+                alt={"My Image"}
                 width={600}
                 height={400}
-                tint
               />
             )}
             {edit === "removebg" && (
@@ -114,31 +114,28 @@ const Edit = ({
               />
             )}
             {edit === "pixelate" && (
-              <CldImage
-                alt={image}
-                src={image}
+              <Image
+                src={`https://res.cloudinary.com/demo/image/upload/e_pixelate:20/${image}`}
+                alt={"Edited Image"}
                 width={600}
                 height={400}
-                pixelate="10"
               />
             )}
             {edit === "grayscale" && (
-              <CldImage
-                alt={image}
-                src={image}
-                width={600}
-                height={400}
-                grayscale
-              />
+              <Image
+              src={`https://res.cloudinary.com/demo/image/upload/e_grayscale/${image}`}
+              alt={"Edited Image"}
+              width={600}
+              height={400}
+            />
             )}
             {edit === "blur" && (
-              <CldImage
-                alt={image}
-                src={image}
-                width={600}
-                height={400}
-                blur="1200"
-              />
+              <Image
+              src={`https://res.cloudinary.com/demo/image/upload/e_blur:800/${image}`}
+              alt={"Edited Image"}
+              width={600}
+              height={400}
+            />
             )}
             {edit === "generativefill" && (
               <CldImage
