@@ -4,7 +4,7 @@ import { Button } from "./ui/button";
 import Link from "next/link";
 import { CardStackIcon, HeartIcon, ImageIcon } from "@radix-ui/react-icons";
 
-const SiderBar = () => {
+const SiderBar = (searchParams:{searchParams:string}) => {
   const [selected, setSelected] = useState("gallery");
   return (
     <div className="w-[18vw]">
