@@ -5,7 +5,7 @@ import { Inter } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import Header from "@/components/Header";
 import { Toaster } from "@/components/ui/toaster";
-
+import { Analytics } from "@vercel/analytics/react";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -19,11 +19,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="darkMode:media">
+    <html lang="en">
       <body className={inter.className}>
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
+          defaultTheme="dark"
           enableSystem
           disableTransitionOnChange
         >
@@ -34,6 +34,7 @@ export default function RootLayout({
             </div>
             <div className="w-[100vw] flex justify-center">{children}</div>
           </div>
+          <Analytics />
           <Toaster />
         </ThemeProvider>
       </body>
