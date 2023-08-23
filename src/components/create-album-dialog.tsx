@@ -16,8 +16,6 @@ import { Folder } from "@/app/albums/page";
 import { createFolder } from "@/utils/actions";
 import { useRouter } from "next/navigation";
 import { Cross2Icon } from "@radix-ui/react-icons";
-import * as DialogPrimitive from "@radix-ui/react-dialog";
-import { DialogClose } from "@radix-ui/react-dialog";
 
 const CreateAlbum = ({ folders }: { folders: Folder[] }) => {
   const albums = folders;

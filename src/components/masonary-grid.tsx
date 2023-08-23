@@ -1,6 +1,5 @@
 import { searchResult } from "@/app/gallery/page";
 import React, { ReactNode } from "react";
-import CloudinaryImage from "./cloudinary-image";
 
 const MasonaryGrid = (props: {
   images: searchResult[];

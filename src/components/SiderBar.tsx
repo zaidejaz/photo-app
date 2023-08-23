@@ -1,12 +1,12 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import { Button } from "./ui/button";
 import Link from "next/link";
 import { CardStackIcon, HeartIcon, ImageIcon } from "@radix-ui/react-icons";
 
 const SiderBar = () => {
   return (
-    <div className="w-[18vw]">
+    <div>
       <div className="space-y-4 py-4">
         <div className="px-3 py-2">
           <h2 className="mb-2 px-4 text-3xl font-bold tracking-tight">
