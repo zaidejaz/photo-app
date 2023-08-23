@@ -87,19 +87,6 @@ const CreateAlbum = ({ folders }: { folders: Folder[] }) => {
           {error && <p className="text-red-500">{error}</p>}
         </div>
         <DialogFooter>
-          {/* {error === "" && (
-            <DialogClose>
-              <Button
-                type="submit"
-                onClick={() => {
-                  createAlbum();
-                }}
-              >
-                Create Album
-              </Button>
-            </DialogClose>
-          )} */}
-          {/* {error !== "" && ( */}
           <Button
             type="submit"
             onClick={() => {
@@ -108,7 +95,6 @@ const CreateAlbum = ({ folders }: { folders: Folder[] }) => {
           >
             Create Album
           </Button>
-          {/* )} */}
         </DialogFooter>
         <div
           className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground"
