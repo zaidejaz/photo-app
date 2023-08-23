@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -44,7 +44,7 @@ export function AddToAlbumDialog({ image }: { image: string }) {
           variant="ghost"
           className="hover:bg-gray-100 hover:text-black space-x-1 items-center"
         >
-          <PlusIcon  height={20} width={20}/>
+          <PlusIcon height={20} width={20} />
           <span>Add To Album</span>
         </Button>
       </DialogTrigger>
@@ -67,11 +67,13 @@ export function AddToAlbumDialog({ image }: { image: string }) {
                 <SelectValue placeholder="Select Album" />
               </SelectTrigger>
               <SelectContent className="space-y-3">
-                {albums.map((album: Folder) => (
-                  <SelectItem key={album.path} value={album.name}>
-                    {album.name}
-                  </SelectItem>
-                ))}
+                <Suspense fallback={<p>Loading...</p>}>
+                  {albums.map((album: Folder) => (
+                    <SelectItem key={album.path} value={album.name}>
+                      {album.name}
+                    </SelectItem>
+                  ))}
+                </Suspense>
               </SelectContent>
             </Select>
           </div>

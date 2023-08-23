@@ -16,7 +16,7 @@ const Edit = ({
   const [prompt, setPrompt] = useState<string>("");
   const [pendingPrompt, setPendingPrompt] = useState<string>("");
   return (
-    <div className="px-4 mt-5">
+    <div className="px-4 mt-5 min-w-[full] flex justify-center flex-col">
       <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
         Edit Image
       </h1>

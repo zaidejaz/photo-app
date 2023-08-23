@@ -2,7 +2,7 @@ import React from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 
 const Loading = () => (
-  <div className="px-4 mt-5">
+  <div className="px-4 mt-5 min-w-[full] flex justify-center flex-col">
     <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
       Edit Image
     </h1>
