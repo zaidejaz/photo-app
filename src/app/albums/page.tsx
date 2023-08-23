@@ -12,8 +12,8 @@ const Albums = async () => {
   const folders = await getFolders();
   return (
     <>
-      <div className="px-4 w-full mt-4">
-        <div className="flex justify-between items-center">
+      <div className="px-4 mt-5 min-w-[full] flex justify-center flex-col">
+        <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 justify-between items-center ">
           <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
             Albums
           </h1>

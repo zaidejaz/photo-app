@@ -32,7 +32,7 @@ export default function RootLayout({
             <div className="w-[20vw] hidden lg:flex">
               <SiderBar />
             </div>
-            {children}
+            <div className="w-[100vw] flex justify-center">{children}</div>
           </div>
           <Toaster />
         </ThemeProvider>
