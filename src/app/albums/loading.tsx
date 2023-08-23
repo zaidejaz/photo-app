@@ -11,16 +11,15 @@ const Loading = () => {
         <Skeleton className="w-[150px] h-[40px]" />
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 my-4 gap-4">
-        <Skeleton className="w-[300px] md:w-[300px] lg:w-[240px] h-[150px]" />
-        <Skeleton className="w-[300px] md:w-[300px] lg:w-[240px] h-[150px]" />
-        <Skeleton className="w-[300px] md:w-[300px] lg:w-[240px] h-[150px]" />
-        <Skeleton className="w-[300px] md:w-[300px] lg:w-[240px] h-[150px]" />
-        <Skeleton className="w-[300px] md:w-[300px] lg:w-[240px] h-[150px]" />
-        <Skeleton className="w-[300px] md:w-[300px] lg:w-[240px] h-[150px]" />
-        <Skeleton className="w-[300px] md:w-[300px] lg:w-[240px] h-[150px]" />
-        <Skeleton className="w-[300px] md:w-[300px] lg:w-[240px] h-[150px]" />
-      </div>
-    </div>
+        <Skeleton className="w-[300px] md:w-[300px] lg:w-[280px] h-[150px]" />
+        <Skeleton className="w-[300px] md:w-[300px] lg:w-[280px] h-[150px]" />
+        <Skeleton className="w-[300px] md:w-[300px] lg:w-[280px] h-[150px]" />
+        <Skeleton className="w-[300px] md:w-[300px] lg:w-[280px] h-[150px]" />
+        <Skeleton className="w-[300px] md:w-[300px] lg:w-[280px] h-[150px]" />
+        <Skeleton className="w-[300px] md:w-[300px] lg:w-[280px] h-[150px]" />
+        <Skeleton className="w-[300px] md:w-[300px] lg:w-[280px] h-[150px]" />
+        <Skeleton className="w-[300px] md:w-[300px] lg:w-[280px] h-[150px]" />
+      </div>    </div>
   );
 };
 

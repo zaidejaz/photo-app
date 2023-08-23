@@ -1,8 +1,9 @@
-import React from "react";
+import React, { Suspense } from "react";
 import AlbumCard from "@/components/album-card";
 import { Button } from "@/components/ui/button";
 import CreateAlbum from "@/components/create-album-dialog";
 import { getFolders } from "@/utils/actions";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export type Folder = {
   name: string;
@@ -23,11 +24,11 @@ const Albums = async () => {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 my-4 gap-4">
           {folders.map((folder: Folder) => (
-            <AlbumCard
-              key={folder.path}
-              folderName={folder.name}
-              folderPath={folder.path}
-            />
+              <AlbumCard
+                key={folder.path}
+                folderName={folder.name}
+                folderPath={folder.path}
+              />
           ))}
         </div>
       </div>
