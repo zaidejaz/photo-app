@@ -8,7 +8,7 @@ import {
 import React from "react";
 import { Button } from "./ui/button";
 import Link from "next/link";
-
+import DeleteAlbum from "./delete-dialog";
 const AlbumCard = ({
   folderName,
   folderPath,
@@ -18,9 +18,10 @@ const AlbumCard = ({
 }) => {
   return (
     <Card>
-      <CardHeader>
-        <CardTitle>{folderName.toUpperCase()}</CardTitle>
+      <CardHeader className="relative">
+        <CardTitle>{folderName}</CardTitle>
         <CardDescription>{`All of your ${folderName} Album Images`}</CardDescription>
+        <DeleteAlbum album={folderName} deleteType="album"/>
       </CardHeader>
       <CardFooter className="mt-auto">
         <Button asChild>
