@@ -16,6 +16,8 @@ import { Folder } from "@/app/albums/page";
 import { createFolder } from "@/utils/actions";
 import { useRouter } from "next/navigation";
 import { Cross2Icon } from "@radix-ui/react-icons";
+import LoadingAnimation from "./loading-animation";
+import { toast } from "./ui/use-toast";
 
 const CreateAlbum = ({ folders }: { folders: Folder[] }) => {
   const albums = folders;
@@ -23,22 +25,38 @@ const CreateAlbum = ({ folders }: { folders: Folder[] }) => {
   const [dialogstate, setDialogState] = useState<boolean>(false);
   const [albumName, setAlbumName] = useState<string>("");
   const [error, setError] = useState<string>("");
-
-  const createAlbum = () => {
+  const [loading, setLoading] = useState<boolean>(false);
+  const createAlbum = async () => {
+    setLoading(true);
     if (albumName.trim() === "") {
       setError("Album name cannot be empty.");
       return;
     }
 
-    if (albums.some((album) => album.name === albumName)) {
+    const trimmedAlbumName = albumName.trim();
+    if (albums.some((album) => album.name === trimmedAlbumName)) {
       setError("Album already exists.");
       return;
     }
 
-    createFolder(albumName);
+    const result = await createFolder(trimmedAlbumName);
+    if (result.statusCode === 200) {
+      toast({
+        variant: "success",
+        title: "Success!!",
+        description: "Album Created Successfuly.",
+      });
+    } else {
+      toast({
+        variant: "destructive",
+        title: "Something Bad Happened!!",
+        description: "There was an error Creating Album.",
+      });
+    }
+    router.refresh();
     setDialogState(false);
     setError("");
-    router.refresh();
+    setLoading(false);
   };
 
   return (
@@ -93,7 +111,7 @@ const CreateAlbum = ({ folders }: { folders: Folder[] }) => {
               createAlbum();
             }}
           >
-            Create Album
+            {loading ? <LoadingAnimation width={20} height={20}/> : "Create Album"}
           </Button>
         </DialogFooter>
         <div

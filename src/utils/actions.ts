@@ -14,7 +14,12 @@ export async function setAsFavouriteAction(
 }
 
 export async function createFolder(folderName: string) {
-  await cloudinary.v2.api.create_folder(folderName);
+  try {
+    await cloudinary.v2.api.create_folder(folderName);
+    return { success: true, statusCode: 200 };
+  } catch (error) {
+    return { success: false, statusCode: 500 };
+  }
 }
 
 export async function getFolders() {
@@ -37,5 +42,32 @@ export async function addImageToAlbum(image: string, album: string) {
     return { success: true, statusCode: 200 };
   } catch (error: any) {
     return { success: false, statusCode: 500, errorMessage: error.message };
+  }
+}
+
+export async function deleteFolder(folderName: any) {
+  try {
+    const folderImages = await cloudinary.v2.search
+      .expression(`resource_type:image AND folder="${folderName}"`)
+      .execute();
+    for (const image of folderImages.resources) {
+      const publicId = image.public_id;
+      const imageName = publicId.replace(`${folderName}/`, "");
+      const newPublicId = imageName;
+      await cloudinary.v2.uploader.rename(publicId, newPublicId);
+    }
+    await cloudinary.v2.api.delete_folder(folderName);
+    return { success: true, statusCode: 200 };
+  } catch (error) {
+    return { success: false, statusCode: 500 };
+  }
+}
+
+export async function deleteImage(image: any) {
+  try {
+    await cloudinary.v2.uploader.destroy(image);
+    return { success: true, statusCode: 200 };
+  } catch (error) {
+    return { success: false, statusCode: 500 };
   }
 }

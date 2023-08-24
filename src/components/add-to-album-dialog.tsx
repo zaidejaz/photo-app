@@ -18,33 +18,62 @@ import {
 } from "@/components/ui/select";
 
 import { Label } from "@/components/ui/label";
-import { Cross2Icon, PlusIcon } from "@radix-ui/react-icons";
+import { Cross2Icon } from "@radix-ui/react-icons";
 import { addImageToAlbum, getFolders } from "@/utils/actions";
 import { Folder } from "@/app/albums/page";
 import { DialogClose } from "@radix-ui/react-dialog";
 import { toast } from "./ui/use-toast";
+import { ImagePlus } from "lucide-react";
+import LoadingAnimation from "./loading-animation";
 
 export function AddToAlbumDialog({ image }: { image: string }) {
   const [albums, setAlbums] = useState<Folder[]>([]);
   const [selectedAlbum, setSelectedAlbum] = useState<string>("");
+  const [dialogOpen, setDialogOpen] = useState<boolean>(false);
+  const [adding, setAdding] = useState<boolean>(false);
+  const [albumsLoading, setAlbumsLoading] = useState<boolean>(false);
 
   useEffect(() => {
     async function fetchAlbums() {
+      setAlbumsLoading(true);
       const albumsData = await getFolders();
       setAlbums(albumsData);
+      setAlbumsLoading(false);
     }
-
     fetchAlbums();
   }, []);
 
+  const addToAlbum = async (image: string, selectedAlbum: string) => {
+    setAdding(true);
+    const result: any = await addImageToAlbum(image, selectedAlbum);
+    if (result.statusCode === 200) {
+      toast({
+        variant: "success",
+        title: "Success!!",
+        description: "Image Added To Album Successfully.",
+      });
+    } else {
+      toast({
+        variant: "destructive",
+        title: "Something Bad Happened!!",
+        description: "There was an error adding image to album.",
+      });
+    }
+    setAdding(false);
+    setDialogOpen(false);
+  };
   return (
-    <Dialog>
-      <DialogTrigger className="w-full">
+    <Dialog open={dialogOpen}>
+      <DialogTrigger
+        onClick={() => {
+          setDialogOpen(true);
+        }}
+      >
         <Button
           variant="ghost"
-          className="hover:bg-gray-100 hover:text-black space-x-1 items-center"
+          className="hover:bg-slate-100 hover:text-black space-x-1 items-center"
         >
-          <PlusIcon height={20} width={20} />
+          <ImagePlus width={20} height={20} />
           <span>Add To Album</span>
         </Button>
       </DialogTrigger>
@@ -66,14 +95,22 @@ export function AddToAlbumDialog({ image }: { image: string }) {
               <SelectTrigger className="w-[180px]">
                 <SelectValue placeholder="Select Album" />
               </SelectTrigger>
-              <SelectContent className="space-y-3">
-                <Suspense fallback={<p>Loading...</p>}>
-                  {albums.map((album: Folder) => (
+              <SelectContent className="py-1">
+                {albumsLoading ? (
+                  <div className="hover:bg-transparent flex justify-center">
+                    <LoadingAnimation
+                      width={20}
+                      height={20}
+                      className="text-white"
+                    />
+                  </div>
+                ) : (
+                  albums.map((album: Folder) => (
                     <SelectItem key={album.path} value={album.name}>
                       {album.name}
                     </SelectItem>
-                  ))}
-                </Suspense>
+                  ))
+                )}
               </SelectContent>
             </Select>
           </div>
@@ -81,31 +118,27 @@ export function AddToAlbumDialog({ image }: { image: string }) {
         <DialogFooter>
           <DialogClose>
             <Button
-              onClick={async () => {
-                const result: any = await addImageToAlbum(image, selectedAlbum);
-                if (result.statusCode === 200) {
-                  toast({
-                    variant: "success",
-                    title: "Success!!",
-                    description: "Image Added To Album Successfully.",
-                  });
-                } else {
-                  toast({
-                    variant: "destructive",
-                    title: "Something Bad Happened!!",
-                    description: "There was an error adding image to album.",
-                  });
-                }
+              onClick={() => {
+                addToAlbum(image, selectedAlbum);
               }}
             >
-              Add To Album
+              {adding ? (
+                <LoadingAnimation width={20} height={20} />
+              ) : (
+                "Add To Album"
+              )}
             </Button>
           </DialogClose>
         </DialogFooter>
-        <DialogClose className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground">
+        <div
+          className="absolute right-4 top-4 cursor-pointer"
+          onClick={() => {
+            setDialogOpen(false);
+          }}
+        >
           <Cross2Icon className="h-4 w-4" />
           <span className="sr-only">Close</span>
-        </DialogClose>
+        </div>
       </DialogContent>
     </Dialog>
   );

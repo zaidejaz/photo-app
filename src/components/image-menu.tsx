@@ -11,6 +11,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { AddToAlbumDialog } from "./add-to-album-dialog";
 import Link from "next/link";
+import DeleteDialog from "./delete-dialog";
+import { FileEdit } from "lucide-react";
 
 export function ImageMenu({ image }: { image: string }) {
   const [menu, setMenu] = useState(false);
@@ -44,18 +46,22 @@ export function ImageMenu({ image }: { image: string }) {
             <AddToAlbumDialog image={image} />
           </DropdownMenuItem>
           <DropdownMenuItem
-            className="gap-3 py-2 hover:bg-gray-100 px-4 font-medium"
             onClick={() => {
               setMenu(false);
             }}
           >
-            <Link
-              href={`/edit?image=${decodeURIComponent(image)}`}
-              className="flex space-x-2"
-            >
-              <Pencil1Icon width={20} height={20} />
+            <Link href={`/edit?image=${image}`} className="flex gap-2 px-2 py-0.5 font-medium">
+              <FileEdit width={20} height={20} />
               <span>Edit</span>
             </Link>
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            asChild
+            onClick={() => {
+              setMenu(false);
+            }}
+          >
+            <DeleteDialog deleteType="image" image={image} />
           </DropdownMenuItem>
         </DropdownMenuGroup>
       </DropdownMenuContent>
