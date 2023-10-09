@@ -27,18 +27,18 @@ const CreateAlbum = ({ folders }: { folders: Folder[] }) => {
   const [error, setError] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const createAlbum = async () => {
-    setLoading(true);
     if (albumName.trim() === "") {
       setError("Album name cannot be empty.");
       return;
     }
-
+    
     const trimmedAlbumName = albumName.trim();
     if (albums.some((album) => album.name === trimmedAlbumName)) {
       setError("Album already exists.");
       return;
     }
-
+    
+    setLoading(true);
     const result = await createFolder(trimmedAlbumName);
     if (result.statusCode === 200) {
       toast({

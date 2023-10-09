@@ -32,6 +32,7 @@ export function AddToAlbumDialog({ image }: { image: string }) {
   const [dialogOpen, setDialogOpen] = useState<boolean>(false);
   const [adding, setAdding] = useState<boolean>(false);
   const [albumsLoading, setAlbumsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string>("");
 
   useEffect(() => {
     async function fetchAlbums() {
@@ -44,6 +45,10 @@ export function AddToAlbumDialog({ image }: { image: string }) {
   }, []);
 
   const addToAlbum = async (image: string, selectedAlbum: string) => {
+    if (selectedAlbum === "") {
+      setError("Please select an album.");
+      return;
+    }
     setAdding(true);
     const result: any = await addImageToAlbum(image, selectedAlbum);
     if (result.statusCode === 200) {
@@ -114,9 +119,9 @@ export function AddToAlbumDialog({ image }: { image: string }) {
               </SelectContent>
             </Select>
           </div>
+            {error && <p className="text-red-500 px-12">{error}</p>}
         </div>
         <DialogFooter>
-          <DialogClose>
             <Button
               onClick={() => {
                 addToAlbum(image, selectedAlbum);
@@ -128,12 +133,12 @@ export function AddToAlbumDialog({ image }: { image: string }) {
                 "Add To Album"
               )}
             </Button>
-          </DialogClose>
         </DialogFooter>
         <div
           className="absolute right-4 top-4 cursor-pointer"
           onClick={() => {
             setDialogOpen(false);
+            setError("")
           }}
         >
           <Cross2Icon className="h-4 w-4" />
